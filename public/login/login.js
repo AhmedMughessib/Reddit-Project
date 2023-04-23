@@ -10,11 +10,7 @@ submitBtn.addEventListener('click',(e)=>{
             Email: userEmail.value,
             password: userPassword.value
         })
-    }).then(result=>result.json())
-    .then(result=>{
-        // const myCookie= result.headers.get("Set-Cookie");
-        // document.cookie=myCookie
-        
     })
+    
 
 })

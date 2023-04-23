@@ -3,36 +3,49 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-const path = require('path');
+const {loginQuery} = require("../database/queries/login");
 
 const loginhandler =  (req, res) => {
-    const email = req.body.Email;
-    const password = req.body.password;
-    bcrypt.compare(password, "$2b$10$TdvRWV8i0HksBKZ2six2TO0SUJ/Fq3gT5g18GzvT.QVljbIs60oMO", (err, result)=> {
-        // result == true
-        if(err){
-            console.log(err)
-        } else if (result) {
-        const myKey = process.env.PRIVATE_KEY
-        const token = {
-            logged: "true",
-            admin: "false",
-            email: email
-        }
-        jwt.sign(token,myKey,(err,newToken)=>{
-            if (err){
-                console.log(err);
-            } else {
-                res.cookie('token',newToken).redirect(200,"/mainpage")
 
+    const userEmail = req.body.Email;
+    const userPassword = req.body.password;
+    const myKey = process.env.PRIVATE_KEY;
+
+    loginQuery(userEmail).then(result => {
+        console.log(userEmail);
+        console.log(userPassword);
+        console.log(result.rows[0].password);
+        bcrypt.compare(userPassword, result.rows[0].password, (err, match)=> {
+            if(err){
+                console.log(err)
+            } else if (match) {
+                console.log('matched');
+    
+            const token = {
+                id: result.rows[0].id,
+                email: userEmail,
+                name: result.rows[0].name,
+                image: result.rows[0].img_url
             }
-        })
-            
-        } else {
-            res.clearCookie('zzz').send('flase')
+    
+            jwt.sign(token,myKey,(err,newToken)=>{
+                if (err){
+                    console.log(err);
+                } else {
+                    res.cookie('token',newToken).location('/mainpage').status(302).end();
+    
+                }
+            })
+                
+            } else {
+                console.log('not matched');
+            }
+    
+        });
+        
+    }).catch(err => console.log(err));
 
-        }
+    
 
-    });
 };
 module.exports = {loginhandler}
