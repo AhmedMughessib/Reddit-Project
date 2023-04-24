@@ -135,7 +135,8 @@ body{
     height: 100%;
 }
 .following{
-    width: 13%;
+    width: 25%;
+    height: 151px;
     background-color: #FFF;
     margin-top: 15px;
     margin-left: 20px;
@@ -159,25 +160,31 @@ body{
 .followeduser{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    /* border: solid;
-    border-width: 1px;
-    border-color: #a3a2a2; */
+    width: 100%;
     padding-left: 10px;
     margin-bottom: 5px;
 
 }
+#infocontainer{
+    padding-left: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .followeduserimage{
-    height: 50px;
-    width: 50px; 
+    height: 90px;
+    width: 90px; 
     border: solid;
     border-width: 1px;
     border-color: rgb(234, 236, 236);
     border-radius: 50%;
 }
 .followedusername{
-    padding-left: 5px;
+    
+    padding-bottom: 20px;
 }
 
 #sidefooter{
