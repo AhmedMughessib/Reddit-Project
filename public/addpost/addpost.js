@@ -17,3 +17,13 @@ postBtn.addEventListener("click",(e) => {
         credentials: "include"
     })
 })
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/userinfo").then(res => res.json()).then(result => {
+        const userName = document.getElementById('username')
+        userName.textContent = result.name;
+        const userImage = document.getElementById('userimage');
+        userImage.setAttribute('src',result.image)
+    })
+})
