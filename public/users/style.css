@@ -252,3 +252,34 @@ body{
   width: auto;
   height: auto;
 }
+
+.useractions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: #DAE0E6; */
+}
+.delete{
+    cursor: pointer;
+        background-color: transparent;
+        height: 50px;
+        width: 50px;
+        font-size: 1.5em;
+        border: none;
+}
+.upvote{
+    cursor: pointer;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    font-size: 1.5em;
+    border: none;
+}
+.comment{
+    cursor: pointer;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    font-size: 1.5em;
+    border: none;
+}

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const {signuphandler, userprofileHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
+const {signuphandler, userprofileHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
 
 const Router = express.Router();
 
@@ -14,12 +14,14 @@ Router.get('/signup',(req,res)=>{
     })
 
     
-    Router.get('/usermainpage',(req,res) => {
-        res.sendFile(path.join(__dirname,'..','..','public','usermainpage','index.html','dd.xa')) // what ??!! is the solution to this
-        // res.sendFile(path.join(__dirname,'..','..','public','usermainpage','usermainpage.css'))
-    })
+    // Router.get('/usermainpage',(req,res) => {
+    //     res.sendFile(path.join(__dirname,'..','..','public','usermainpage','index.html','dd.xa')) // what ??!! is the solution to this
+    //     // res.sendFile(path.join(__dirname,'..','..','public','usermainpage','usermainpage.css'))
+    // })
     
-    Router.post('/loginaction',loginhandler)
+Router.post('/loginaction',loginhandler)
+
+
 Router.get('/posts', getPostsHandler)
     
 Router.post('/signupaction',signuphandler)
@@ -38,4 +40,11 @@ Router.get("/userinfo",authentication , userInfoHandler)
 Router.get("/userprofile/:username", userprofileHandler)
 
 Router.get('/logout', logOutHandler)
+
+Router.delete('/deletepost/:id', deletePostHandler)
+
+Router.post('/comments', authentication, getCommentHandler)
+
+Router.post('/addcomment', authentication, addCommentHandler)
+
 module.exports = {Router}

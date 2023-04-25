@@ -2,7 +2,6 @@ const {addPostQuery} = require("../database/queries/addpost");
 
 
 const addPost = (req,res) => {
-console.log(res.userInfo);
 
 const postTitle = req.body.Title;
 const postPicture =  req.body.imageUrl;
