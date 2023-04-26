@@ -17,7 +17,7 @@ body{
 .loggednavbar{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 50px;
     border-bottom: solid;
@@ -32,7 +32,7 @@ body{
 #searchbar{
     margin-bottom: 10px;
     height: 37px;
-	width: 500px;
+	width: 600px;
     margin-top: 10px;
     border: solid;
     border-radius: 20px;
@@ -40,27 +40,20 @@ body{
     border-color: rgb(218, 218, 230);
     background-color:rgb(234, 236, 236) ;
     position: relative;
-
+    right: 150px;
 }
 #submit{
     background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") center no-repeat;
     border: none;
     position: relative;
-    right: 40px;
+    right: 190px;
     top: 5px;
     margin-top: 20px;
     color:rgb(234, 236, 236);
     width: 20px;
 }
-
-.useroptions{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}
-#logoutbutton{
-    margin-bottom: 17px;
+#loginicon{
+    margin-bottom: 10px;
     background: #FF4500;
 	color: white;
 	border-style: solid;
@@ -72,40 +65,14 @@ body{
 	text-shadow: none;
     font-weight: 800;
     margin-top: 10px;
-    margin-left: 20px;
-
-
+    margin-right: 10px;
+    
 }
 
-.profileicon{
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 20px;
-    width: 20px;
-    font-size: xx-large;
-    margin-bottom: 25px;
-    text-decoration: none;
-    color: inherit; 
-}
-.homeicon{
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 20px;
-    width: 20px;
-    font-size: xx-large;
-    margin-bottom: 25px;
-    text-decoration: none; 
-    color: inherit; 
-}
-#addpost{
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 20px;
-    width: 20px;
-    font-size: xx-large;
-    margin-bottom: 25px;
-    text-decoration: none; 
-    color: inherit; 
+.useroptions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .userinfo{
     display: flex;
@@ -113,26 +80,15 @@ body{
     align-items: center;
     border: solid;
     border-width: 1px;
-    border-color: rgb(248, 252, 252);
-    justify-content: space-between;
-    padding-left: 10px;
-    margin-bottom: 5px;
-
+    border-color: rgb(234, 236, 236);
 }
 #userimage{
-    height: 50px;
-    width: 50px; 
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(234, 236, 236);
-    border-radius: 50%;
-}
-#username{
-    padding-left: 5px;
+    height: 100px;
+    width: 150px; 
 }
 
-/* __________________________________________________ */
 
+/* ____________________________________________________________________ */
 .homepage{
     width: 100%;
     display: flex;
@@ -141,51 +97,10 @@ body{
     background-color:#DAE0E6;
     height: 100%;
 }
-.following{
-    width: 13%;
-    background-color: #FFF;
-    margin-top: 15px;
-    margin-left: 20px;
-    border: solid;
-    border-width: 1px;
-    border-color: #a3a2a2;
-    margin-bottom: 20px;
 
-}
-#followtitle{
-    display: flex;
-    justify-content: flex-start;
-    font-weight: 650;
-    padding-top: 10px;
-    padding-left: 12px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #dddcdc;
-    height: 30px;
 
-}
-.followeduser{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    /* border: solid;
-    border-width: 1px;
-    border-color: #a3a2a2; */
-    padding-left: 10px;
-    margin-bottom: 5px;
 
-}
-.followeduserimage{
-    height: 50px;
-    width: 50px; 
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(234, 236, 236);
-    border-radius: 50%;
-}
-.followedusername{
-    padding-left: 5px;
-}
+
 
 #sidefooter{
     display: flex;
@@ -225,6 +140,7 @@ body{
 .posts{
     width: 50%;
     margin-top: 20px;
+    margin-left: 50px;
 }
 .post{
     background-color: #a3a2a2;
@@ -242,24 +158,23 @@ body{
 
 }
 .postimage{
-    /* height: 250px;
-    width: 300px;
-    border: solid;
-    margin-top: 20px; */
+   
     display: block;
   max-width:100%;
   max-height:100%;
   width: auto;
   height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: solid;
+  border-width: 1px;
+  border-color: #DAE0E6;
 }
 .useractions{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-top: solid;
-    border-width: 1px;
-    border-color: #DAE0E6;
-    margin-top: 10px;
+    /* background-color: #DAE0E6; */
 }
 .delete{
     cursor: pointer;
@@ -285,7 +200,6 @@ body{
     font-size: 1.5em;
     border: none;
 }
-
 .commentwonerinfo{
     display: flex;
     flex-direction: row;
@@ -366,7 +280,6 @@ body{
     top: 15px;
     left: 5px;
 }
-
 .upvotecontainer{
     display: flex;
     flex-direction: row;
