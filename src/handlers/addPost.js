@@ -8,7 +8,6 @@ const postPicture =  req.body.imageUrl;
 const postBody = req.body.Text;
 const userID = res.userInfo.id;
 const currentDate = new Date();
-console.log(currentDate, typeof currentDate);
 const day = currentDate.getDate();
 const month = (currentDate.getMonth() +1);
 
@@ -17,7 +16,6 @@ const year = currentDate.getFullYear();
 const date = year+'-'+month+'-'+day;
 
 
-console.log(postTitle, postPicture, postBody, userID, date);
 
 
 

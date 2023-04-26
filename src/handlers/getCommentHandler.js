@@ -6,6 +6,10 @@ const getCommentHandler = (req, res) => {
     const currentUserName = res.userInfo.name;
     const currentUserImage = res.userInfo.image;
     const currentUserID = res.userInfo.id;
+    if (result.rows.length ===0) {
+      result.rows.push({})
+      result.rows[0].noComments = true;
+    }
     result.rows[0].userName= currentUserName;
     result.rows[0].userImage= currentUserImage;
     result.rows[0].userID = currentUserID

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const {signuphandler, userprofileHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
+const {signuphandler, userprofileHandler, upvoteHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
 
 const Router = express.Router();
 
@@ -46,5 +46,7 @@ Router.delete('/deletepost/:id', deletePostHandler)
 Router.post('/comments', authentication, getCommentHandler)
 
 Router.post('/addcomment', authentication, addCommentHandler)
+
+Router.post("/upvote", authentication, upvoteHandler)
 
 module.exports = {Router}
