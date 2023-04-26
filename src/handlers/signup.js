@@ -1,9 +1,11 @@
 const bcrypt = require("bcrypt");
 const {signupQuery} = require("../database/queries/signup");
-const {getUserQuery} = require("../database/queries/getUserQuery")
+const {getUserQuery} = require("../database/queries/getUserQuery");
+const createError = require('http-errors');
 
 
-const signuphandler = (req,res) =>{
+
+const signuphandler = (req,res, next) =>{
 
     const userEmail = req.body.Email;
     const userName = req.body.username;
@@ -12,8 +14,7 @@ const signuphandler = (req,res) =>{
     const picture = req.body.image || "https://www.redditinc.com/assets/images/site/reddit-logo.png"; 
 
     if (userName.length < 5 || !userEmail.includes('@') || !userEmail.includes('.com') || userPassword != userConfirmPass) {
-        console.log('not valid');
-        res.send({valid: false})
+        next(createError(401, {valid: false}))
     } else {    
 
         getUserQuery(userName).then(result => {
@@ -26,7 +27,7 @@ const signuphandler = (req,res) =>{
                     })
                 });
             } else {
-                res.send({valid: false})
+                next(createError(401, {valid: false}))
             }
         })
 

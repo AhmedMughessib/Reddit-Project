@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const { error } = require('console');
 const  CreateError = require("http-errors")
 
+require('dotenv').config();
+
 morgan()
 const app = express();
 app.use(cookieParser())
@@ -18,19 +20,16 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(Router)
 app.use((req,res,next)=>{
-    const error =  new Error('Not Found')
-    error.status = 404
-    next(error)
+ res.status(404).send("bad request")
 }) 
 
-app.use((err, req, res, next) => {
-    res.status(err.status || 500)
-    res.send({
-        error:{
-            status: err.status || 500,
-            message: err.message || 'Internal Server Error',
-        }
-    })
+app.use((error, req, res, next) => {
+    if(error.status){
+        res.status(error.status).send(error)
+    }else{  
+        res.status(500).send("interval server error")
+    }
+    
 })
 
 
