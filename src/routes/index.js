@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const {signuphandler, userprofileHandler, userbarHandler, upvoteHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
+const {signuphandler, userprofileHandler, getUserData, userbarHandler, upvoteHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
 
 const Router = express.Router();
 
@@ -19,7 +19,7 @@ Router.get('/signup',(req,res)=>{
 Router.post('/loginaction',loginhandler)
 
 
-Router.get('/posts', getPostsHandler)
+Router.get('/posts', getUserData, getPostsHandler)
     
 Router.post('/signupaction',signuphandler)
 
@@ -34,7 +34,7 @@ Router.get("/users/:username", userPageHandler)
 
 Router.get("/userinfo",authentication , userInfoHandler)
 
-Router.get("/userprofile/:username", userprofileHandler)
+Router.get("/userprofile/:username", getUserData, userprofileHandler)
 
 Router.get('/logout', logOutHandler)
 
@@ -48,4 +48,8 @@ Router.post("/upvote", authentication, upvoteHandler)
 
 Router.get("/usersbar", userbarHandler)
 
+
+
+
 module.exports = {Router}; 
+

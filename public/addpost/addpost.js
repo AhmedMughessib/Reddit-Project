@@ -15,7 +15,7 @@ postBtn.addEventListener("click",(e) => {
             Text: postText.value
         }),
         credentials: "include"
-    })
+    }).then(window.location.href ='/main')
 })
 
 

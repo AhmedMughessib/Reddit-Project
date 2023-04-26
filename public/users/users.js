@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         profileUserEmail.textContent = result[0].email;
         profileUserImage.setAttribute('src',result[0].img_url)
 
-        for (let i=0; i < result.length; i++) {
+        for (let i=0; i < result.length-1; i++) {
 
             const postBody =  document.createElement('div');
             postBody.classList.add('post');
@@ -199,26 +199,29 @@ document.addEventListener("DOMContentLoaded", () => {
             
             
         })
-        
-        
+        if (result[i].user_id === result[result.length-1].id) {
+
+
+            
             const createDelete = document.createElement('button');
             createDelete.classList.add('delete');
             const deleteIcon = document.createElement('i');
             deleteIcon.classList.add('ri-delete-bin-6-line')
             createDelete.appendChild(deleteIcon)
             createDelete.addEventListener("click", ()=>{
-                        fetch(`/deletepost/${result[i].id}`, {
-                            method: "Delete"
-                        }).then(()=>{
-                            
-                        })
-
-                        
+                fetch(`/deletepost/${result[i].id}`, {
+                    method: "Delete"
+                }).then(()=>{
+                    
+                })
+                
+                
             })
-
+            
+            userActions.appendChild(createDelete);
+        }
             userActions.appendChild(upvotecontainer);
             userActions.appendChild(comment);
-            userActions.appendChild(createDelete);
 
 
     
