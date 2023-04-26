@@ -1,9 +1,11 @@
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     
-
-
-
-
 
 
     fetch("/posts").then(res => res.json()).then(result => {
@@ -246,6 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
             userName.textContent = result.name;
             const userImage = document.getElementById('userimage');
             userImage.setAttribute('src',result.image)
+
+            const profileIcon = document.querySelector('.profileicon')
+            profileIcon.setAttribute("href", `users/${result.name}`)
+
     
         })
     })
@@ -257,4 +263,6 @@ const logOutBtn = document.getElementById('logoutbutton');
 logOutBtn.addEventListener("click", () => {
     fetch("/logout")
 })
+
+
 
