@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch("/posts").then(res => res.json()).then(result => {
 
-        for (let i=0; i < result.length; i++) {
+        for (let i=0; i < result.length-1; i++) {
 
             const postBody =  document.createElement('div');
             postBody.classList.add('post');
@@ -193,7 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
         })
         
-        
+        if (result[i].user_id === result[result.length-1].id) {
+
             const createDelete = document.createElement('button');
             createDelete.classList.add('delete');
             const deleteIcon = document.createElement('i');
@@ -207,11 +208,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
 
                         
-            })
-
+                    })
+                    
+                    userActions.appendChild(createDelete);
+        }
             userActions.appendChild(upvotecontainer);
             userActions.appendChild(comment);
-            userActions.appendChild(createDelete);
 
 
     
