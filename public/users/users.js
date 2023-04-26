@@ -71,6 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })
 
+
+
+
+
+
+
 const logOutBtn = document.getElementById('logoutbutton');
 logOutBtn.addEventListener("click", () => {
     fetch("/logout")

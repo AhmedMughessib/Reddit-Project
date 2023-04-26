@@ -13,11 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const postBody =  document.createElement('div');
             postBody.classList.add('post');
     
+            const userLink = document.createElement('a');
+            userLink.setAttribute('href', `/users/${result[i].name}`)
+            
             const elementcontent = document.createElement('p');
             elementcontent.classList.add('elementcontent');
+
+            userLink.appendChild(elementcontent)
+
             const postowner = document.createElement('div');
             postowner.classList.add('postowner');
-            postowner.appendChild(elementcontent);
+            postowner.appendChild(userLink);
     
             const posttitle = document.createElement('div');
             posttitle.classList.add('posttitle');
@@ -43,28 +49,52 @@ document.addEventListener("DOMContentLoaded", () => {
             upvoteIcon.classList.add('ri-arrow-up-line');
             upvote.appendChild(upvoteIcon);
 
+            const numberofVotes = document.createElement('p');
+            numberofVotes.classList.add('numberofVotes');
+            const upvotecontainer = document.createElement('div');
+            upvotecontainer.classList.add('upvotecontainer');
+
+            upvotecontainer.appendChild(upvote);
+            upvotecontainer.appendChild(numberofVotes)
+
+
+            upvote.addEventListener("click", () => {
+                fetch('/upvote', {
+                    method: "POST",
+                    headers:  {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        post_id: result[i].id
+                    })
+
+                })
+            })
+
             const comment = document.createElement('button');
             comment.classList.add('comment');
             const commentIcon = document.createElement('i');
             commentIcon.classList.add('ri-discuss-line')
             comment.appendChild(commentIcon)
 
+
+            let contentIsLoaded = false;
             comment.addEventListener("click", () => {
                 fetch('/comments', {
                     method: "POST",
                     headers:  {'Content-Type': 'application/json'},
                     body: JSON.stringify({post_id: result[i].id})
                 }).then(newRes => newRes.json()).then(newResA => {
+                    if (!contentIsLoaded) {
 
-                
-                   
-
-
-                    // ________________________________________________________
-
+                        
+                        
+                        
+                        
+                        // ________________________________________________________
+                    
                     const commentSection = document.createElement('div'); // this contain the whol comment section;
                     commentSection.classList.add('commentsection');
-
+                    
+                    if (!newResA[0].noComments) {
                     
                     
                     for (let i =0; i< newResA.length; i++) {
@@ -91,75 +121,77 @@ document.addEventListener("DOMContentLoaded", () => {
                         
                         commentOwnerInfo.appendChild(commentOwnerImage);
                         commentOwnerInfo.appendChild(commentOwnerName); 
-
+                        
                         userComment.appendChild(commentOwnerInfo);
                         userComment.appendChild(commentBody);
-
+                        
                         commentSection.appendChild(userComment)
-
+                        
                         
                         
                     }
-
+                    
                     // _________________________________________________-
-
-                    postBody.appendChild(commentSection)
-
-                    const userAddComment = document.createElement('div');
-                    userAddComment.classList.add('useraddcomment');
-
-                    const addCommentUserInfo = document.createElement('div');
-                    addCommentUserInfo.classList.add('addcommentuserinfo');
-
-                    const addCommentImage = document.createElement('img');
-                    addCommentImage.setAttribute("src", newResA[0].userImage);
-                    addCommentImage.classList.add('addcommentimage');
-
-                    const addCommentUsername = document.createElement('p');
-                    addCommentUsername.textContent = newResA[0].userName;
-                    addCommentUsername.classList.add('addcommentusername');
-
-
-                    const addCommentBox = document.createElement('input');
-                    addCommentBox.type = 'tel';
-                    addCommentBox.placeholder = 'add a comment';
-                    addCommentBox.classList.add('addcomentbox');
-
-                    const addCommentBtn = document.createElement('button');
-                    addCommentBtn.textContent = 'Comment';
-                    addCommentBtn.classList.add('addcommentbtn');
-
-                    addCommentUserInfo.appendChild(addCommentImage);
-                    addCommentUserInfo.appendChild(addCommentUsername);
-
-                    userAddComment.appendChild(addCommentUserInfo);
-                    userAddComment.appendChild(addCommentBox);
-                    userAddComment.appendChild(addCommentBtn);
-
-                    postBody.appendChild(userAddComment)
-
-
-                    addCommentBtn.addEventListener("click", () => {
-                        fetch("/addcomment", {
-                            method: "POST",
-                            headers:  {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                commentValu : addCommentBox.value,
-                                posttID : result[i].id,
-                                commenterId: newResA[0].userID
-
-                            })
+                    
+                }
+                postBody.appendChild(commentSection)
+                
+                const userAddComment = document.createElement('div');
+                userAddComment.classList.add('useraddcomment');
+                
+                const addCommentUserInfo = document.createElement('div');
+                addCommentUserInfo.classList.add('addcommentuserinfo');
+                
+                const addCommentImage = document.createElement('img');
+                addCommentImage.setAttribute("src", newResA[0].userImage);
+                addCommentImage.classList.add('addcommentimage');
+                
+                const addCommentUsername = document.createElement('p');
+                addCommentUsername.textContent = newResA[0].userName;
+                addCommentUsername.classList.add('addcommentusername');
+                
+                
+                const addCommentBox = document.createElement('input');
+                addCommentBox.type = 'tel';
+                addCommentBox.placeholder = 'add a comment';
+                addCommentBox.classList.add('addcomentbox');
+                
+                const addCommentBtn = document.createElement('button');
+                addCommentBtn.textContent = 'Comment';
+                addCommentBtn.classList.add('addcommentbtn');
+                
+                addCommentUserInfo.appendChild(addCommentImage);
+                addCommentUserInfo.appendChild(addCommentUsername);
+                
+                userAddComment.appendChild(addCommentUserInfo);
+                userAddComment.appendChild(addCommentBox);
+                userAddComment.appendChild(addCommentBtn);
+                
+                postBody.appendChild(userAddComment)
+                
+                
+                addCommentBtn.addEventListener("click", () => {
+                    fetch("/addcomment", {
+                        method: "POST",
+                        headers:  {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            commentValu : addCommentBox.value,
+                            posttID : result[i].id,
+                            commenterId: newResA[0].userID
+                            
                         })
                     })
-
-
-
                 })
-
-
+                
+             contentIsLoaded = true;   
+            }
+                
             })
             
-
+            
+        })
+        
+        
             const createDelete = document.createElement('button');
             createDelete.classList.add('delete');
             const deleteIcon = document.createElement('i');
@@ -175,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         
             })
 
-            userActions.appendChild(upvote);
+            userActions.appendChild(upvotecontainer);
             userActions.appendChild(comment);
             userActions.appendChild(createDelete);
 
@@ -192,6 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
             elementcontent.textContent = result[i].name + ' Posted';
             posttitleH1.textContent = result[i].title;
             posttext.textContent = result[i].posttext;
+            numberofVotes.textContent =result[i].votes_count
             postimage.setAttribute('src',result[i].post_img);
             postBody.setAttribute("postDbId", result[i].id)
     
