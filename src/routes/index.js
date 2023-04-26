@@ -46,4 +46,8 @@ Router.post('/addcomment', authentication, addCommentHandler)
 
 Router.post("/upvote", authentication, upvoteHandler)
 
+Router.get("/main", (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..','public', 'usermainpage','index.html' ))
+})
+
 module.exports = {Router}

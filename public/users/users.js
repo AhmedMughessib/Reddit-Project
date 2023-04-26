@@ -255,6 +255,9 @@ document.addEventListener("DOMContentLoaded", () => {
             userName.textContent = result.name;
             const userImage = document.getElementById('userimage');
             userImage.setAttribute('src',result.image)
+
+            const profileIcon = document.querySelector('.profileicon')
+            profileIcon.setAttribute("href", `/users/${result.name}`)
     
         })
     })
