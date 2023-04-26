@@ -250,10 +250,60 @@ document.addEventListener("DOMContentLoaded", () => {
             userImage.setAttribute('src',result.image)
 
             const profileIcon = document.querySelector('.profileicon')
-            profileIcon.setAttribute("href", `users/${result.name}`)
+            profileIcon.setAttribute("href", `/users/${result.name}`)
 
     
         })
+    })
+
+
+
+    fetch('/usersbar').then(res => res.json()).then(res => {
+        const following = document.querySelector('.following');
+
+        for (let i=0; i<10; i++) {
+            // const followeduser = document.createElement('div');
+            // followeduser.classList.add('followeduser');
+
+            // const followedusername = document.createElement('div');
+            // followedusername.classList.add('followedusername');
+
+            // const followeduserimage = document.createElement('img')
+            // followeduserimage.classList.add('followeduserimage')
+
+
+            
+            // followeduser.appendChild(followedusername);
+            // followeduser.appendChild(followeduserimage);
+            // following.appendChild(followeduser);
+
+            // followeduserimage.setAttribute("src",res[i].name)
+            // followedusername.textContent(res[i].name)
+            // create the parent div element
+const followedUserDiv = document.createElement('div');
+followedUserDiv.classList.add('followeduser');
+
+// create the img element and set its attributes
+const img = document.createElement('img');
+img.classList.add('followeduserimage');
+img.alt = 'userphoto';
+img.src = res[i].img_url;
+
+// create the div element for the username
+const usernameDiv = document.createElement('a');
+usernameDiv.classList.add('followedusername');
+usernameDiv.textContent = res[i].name;
+usernameDiv.setAttribute('href', `/users/${res[i].name}`)
+
+// append the img and username divs to the parent div
+followedUserDiv.appendChild(img);
+followedUserDiv.appendChild(usernameDiv);
+
+// append the parent div to the document
+following.appendChild(followedUserDiv);
+
+        }
+
     })
     
 })
@@ -261,7 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const logOutBtn = document.getElementById('logoutbutton');
 logOutBtn.addEventListener("click", () => {
-    fetch("/logout")
+    fetch("/logout").then(res => {
+        window.location.href='/'
+    })
 })
 
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const {signuphandler, userprofileHandler, upvoteHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
+const {signuphandler, userprofileHandler, userbarHandler, upvoteHandler, addCommentHandler, getCommentHandler, deletePostHandler, userPageHandler, loginhandler, authentication, addPost, getPostsHandler, logOutHandler, userInfoHandler} = require("../handlers");
 
 const Router = express.Router();
 
@@ -46,8 +46,6 @@ Router.post('/addcomment', authentication, addCommentHandler)
 
 Router.post("/upvote", authentication, upvoteHandler)
 
-Router.get("/main", (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..','public', 'usermainpage','index.html' ))
-})
+Router.get("/usersbar", userbarHandler)
 
-module.exports = {Router}
+module.exports = {Router}; 
