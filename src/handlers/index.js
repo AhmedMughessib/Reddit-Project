@@ -13,7 +13,7 @@ const {userbarHandler} = require("./userbarHandler");
 const {getUserData} = require("./getUserData");
 // here i used the abs path because the relative path cause an error althoug the app and function works fine
 // it might cause an errr when i deploy
-const {addPost} = require("/Users/Mughessib/Desktop/RRRRR/Reddit-Project/src/handlers/addPost");
+const {addPost} = require("./addPost");
 const {getPostsHandler} = require("./getposts");
 
 
